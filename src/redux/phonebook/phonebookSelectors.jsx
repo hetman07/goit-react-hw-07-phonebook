@@ -6,6 +6,9 @@ const getItems = state => state.contacts.items;
 
 const getFilter = state => state.contacts.filter;
 
+const getError = state => state.contacts.error;
+const getErrorMsg = state => state.contacts.error_message;
+
 //сложный селектор - это селектор к-рый исп. простой селектор+возвращает производные данные
 // const getVisibleContacts = state => {
 //   const items = getItems(state);
@@ -23,4 +26,18 @@ const getVisibleContacts = createSelector(
     );
   },
 );
-export default { getLoading, getItems, getFilter, getVisibleContacts };
+
+const getContactId = createSelector(
+  [(state, contId) => contId, getItems],
+  (contId, items) => items.find(item => item.id === contId),
+);
+
+export default {
+  getLoading,
+  getItems,
+  getFilter,
+  getError,
+  getErrorMsg,
+  getVisibleContacts,
+  getContactId,
+};
