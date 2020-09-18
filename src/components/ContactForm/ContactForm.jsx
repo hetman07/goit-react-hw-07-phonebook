@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import phonebookOperations from "../../redux/phonebook/phonebookOperations";
-import Alert from "../Alert";
+import phonebookSelectors from "../../redux/phonebook/phonebookSelectors";
 
+import Alert from "../Alert";
 import styles from "./ContactForm.module.css";
 
 class ContactForm extends Component {
@@ -87,7 +88,7 @@ class ContactForm extends Component {
   }
 }
 const mapStateToprops = state => ({
-  storeContacts: state.contacts.items,
+  storeContacts: phonebookSelectors.getItems(state),
 });
 
 const mapDispatchToprops = {

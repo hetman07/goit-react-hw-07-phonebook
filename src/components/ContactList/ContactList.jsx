@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import PropTypes from "prop-types";
 import phonebookOperations from "../../redux/phonebook/phonebookOperations";
+import phonebookSelectors from "../../redux/phonebook/phonebookSelectors";
 import styles from "./ContactList.module.css";
 
 const ContactList = ({ contacts, onRemove }) => {
+  console.log("re-render list");
   return (
     <div className={styles.TaskEditor}>
       <h2>Contacts</h2>
@@ -48,16 +50,9 @@ ContactList.propTypes = {
   onRemove: PropTypes.func.isRequired,
 };
 
-const mapStateToprops = state => {
-  const { items, filter } = state.contacts;
-
-  const visibleContacts = items.filter(contact => {
-    return contact.name.toLowerCase().includes(filter.toLowerCase());
-  });
-  return {
-    contacts: visibleContacts,
-  };
-};
+const mapStateToprops = state => ({
+  contacts: phonebookSelectors.getVisibleContacts(state),
+});
 
 const mapDispatchToprops = {
   onRemove: phonebookOperations.delContact,

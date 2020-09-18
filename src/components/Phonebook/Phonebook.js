@@ -3,6 +3,8 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { connect } from "react-redux";
 
 import phonebookOperations from "../../redux/phonebook/phonebookOperations";
+import phonebookSelectors from "../../redux/phonebook/phonebookSelectors";
+
 import ContactForm from "../ContactForm";
 import Filter from "../Filter";
 import ContactList from "../ContactList";
@@ -26,7 +28,7 @@ class Phonebook extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoadingContact: state.contacts.loading,
+  isLoadingContact: phonebookSelectors.getLoading(state),
 });
 
 const mapDispatchToProps = {

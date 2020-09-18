@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import phonebookActions from "../../redux/phonebook/phonebookActions";
+import phonebookSelectors from "../../redux/phonebook/phonebookSelectors";
 import { CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
@@ -37,8 +38,8 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  value: state.contacts.filter,
-  lengthContacts: state.contacts.items.length,
+  value: phonebookSelectors.getFilter(state),
+  lengthContacts: phonebookSelectors.getItems(state).length,
 });
 
 const mapDispatchToProps = {
